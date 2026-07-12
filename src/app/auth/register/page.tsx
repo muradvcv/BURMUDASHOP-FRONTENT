@@ -1,300 +1,338 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { useState } from "react";
 import {
-  HiOutlineUser,
-
-  HiOutlineLockClosed,
-  HiOutlinePhone,
-} from "react-icons/hi2";
-import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
+  Form,
+  TextField,
+  Label,
+  Input,
+  FieldError,
+  Button,
+} from "@heroui/react";
+import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
-import { HiOutlineMail } from "react-icons/hi";
-
+import Lottie from "lottie-react";
+import secureAnimation from "@/app/assets/lottie/resicon.json";
 const RegisterPage = () => {
-  const [showPass, setShowPass] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [passwordValue, setPasswordValue] = React.useState("");
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data: Record<string, string> = {};
+
+    formData.forEach((value, key) => {
+      data[key] = value.toString();
+    });
+
+    console.log(data);
+  };
 
   return (
-    <div className="min-h-screen bg-[#f7f7f7] flex items-center justify-center py-25">
+    <section className="min-h-screen bg-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex gap-5 rounded-2xl shadow bg-orange-400">
+        <div className="hidden lg:flex flex-col items-center justify-center w-[460px] bg-gradient-to-br from-orange-500 via-orange-400 to-amber-400 rounded-l-2xl p-10 text-white relative overflow-hidden">
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 bg-white rounded-3xl overflow-hidden shadow-xl">
+          {/* Background Blur */}
+          <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-white/10 blur-3xl" />
 
+          {/* Lottie */}
+          <div className="relative z-10">
+            <Lottie
+              animationData={secureAnimation}
+              loop
+              className="w-[320px] h-[320px]"
+            />
+          </div>
 
-        {/* LEFT SIDE */}
+          {/* Content */}
+          <div className="relative z-10 text-center mt-4">
 
-        <div className="hidden lg:flex relative flex-col justify-between bg-[#050b14] text-white p-10 overflow-hidden">
-
-          <div className="absolute w-80 h-80 bg-orange-500/20 rounded-full blur-3xl top-10 right-0" />
-
-          <div>
-
-            <h2 className="text-xl font-bold">
-              🛒 <span className="text-orange-500">Burmuda</span>Shop
+            <h2 className="text-4xl font-bold leading-tight">
+              Shop With <br /> Confidence
             </h2>
 
-
-            <h1 className="mt-10 text-5xl font-bold leading-tight">
-              Shop
-              <span className="text-orange-500"> Smarter,</span>
-              <br />
-              Live
-              <span className="text-orange-500"> Better</span>
-            </h1>
-
-
-            <p className="mt-5 text-gray-400 max-w-sm">
-              Join BurmudaShop and enjoy premium products,
-              secure payments and fast delivery at your doorstep.
+            <p className="mt-5 text-orange-100 leading-7">
+              Create your BurmudaShop account and enjoy a secure,
+              faster and smarter shopping experience with exclusive
+              offers, order tracking and wishlist support.
             </p>
 
           </div>
 
+          {/* Features */}
 
-          {/* Image */}
+          <div className="relative z-10 mt-10 grid grid-cols-2 gap-4 w-full">
 
-          <div className="relative h-72">
+            <div className="bg-white/15 backdrop-blur-md rounded-xl p-4 text-center">
+              <h3 className="text-2xl font-bold">🔒</h3>
+              <p className="mt-2 text-sm font-medium">
+                Secure Account
+              </p>
+            </div>
 
-            <Image
-              src="/register-banner.png"
-              alt="shopping"
-              fill
-              className="object-contain"
-            />
+            <div className="bg-white/15 backdrop-blur-md rounded-xl p-4 text-center">
+              <h3 className="text-2xl font-bold">⚡</h3>
+              <p className="mt-2 text-sm font-medium">
+                Fast Checkout
+              </p>
+            </div>
 
-          </div>
+            <div className="bg-white/15 backdrop-blur-md rounded-xl p-4 text-center">
+              <h3 className="text-2xl font-bold">❤️</h3>
+              <p className="mt-2 text-sm font-medium">
+                Wishlist
+              </p>
+            </div>
 
-
-          <div className="grid grid-cols-3 gap-3">
-
-            {
-              [
-                "Premium Quality",
-                "Secure Payment",
-                "Fast Delivery"
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="bg-white/10 rounded-xl p-3 text-xs"
-                >
-                  <p className="font-semibold">
-                    {item}
-                  </p>
-                  <span className="text-gray-400">
-                    Trusted service
-                  </span>
-                </div>
-              ))
-            }
+            <div className="bg-white/15 backdrop-blur-md rounded-xl p-4 text-center">
+              <h3 className="text-2xl font-bold">📦</h3>
+              <p className="mt-2 text-sm font-medium">
+                Order Tracking
+              </p>
+            </div>
 
           </div>
 
         </div>
+        <div className="max-w-3xl w-full">
+          <div className="bg-white rounded-r-2xl border border-slate-100 shadow-xl p-6 md:p-10">
 
-
-
-
-        {/* RIGHT SIDE */}
-
-        <div className="p-8 sm:p-12">
-
-
-          <div className="max-w-md mx-auto">
-
-
-            <div className="text-center">
-
-              <div className="mx-auto w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
-                <HiOutlineUser size={28} />
-              </div>
-
-
-              <h2 className="mt-5 text-3xl font-bold">
+            {/* Header */}
+            <div className="text-center mb-10">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
                 Create Your Account
-              </h2>
-
-              <p className="text-sm text-gray-500 mt-2">
-                Join BurmudaShop and start your amazing shopping journey.
+              </h1>
+              <p className="text-slate-500 mt-3 text-sm md:text-base">
+                Join <span className="text-orange-600 font-semibold">BurmudaShop</span> and start shopping smart.
               </p>
-
             </div>
 
+            <Form
+              onSubmit={onSubmit}
+              className="space-y-6"
+              render={(props) => <form {...props} />}
+            >
+              {/* Row 1: Name & Email */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <TextField isRequired name="name" className="flex flex-col gap-1.5">
+                  <Label className="text-sm font-semibold text-slate-700">Full Name</Label>
+                  <Input
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                  />
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
 
-
-            <form className="mt-8 space-y-4">
-
-
-              {/* Name + Phone */}
-
-              <div className="grid sm:grid-cols-2 gap-3">
-
-
-                <Input
-                  icon={<HiOutlineUser />}
-                  placeholder="Full Name"
-                />
-
-
-                <Input
-                  icon={<HiOutlinePhone />}
-                  placeholder="Phone Number"
-                />
-
-
-              </div>
-
-
-
-              <Input
-                icon={<HiOutlineMail />}
-                placeholder="Email Address"
-              />
-
-
-
-              <div className="relative">
-
-                <Input
-                  icon={<HiOutlineLockClosed />}
-                  placeholder="Password"
-                  type={showPass ? "text" : "password"}
-                />
-
-
-                <button
-                  type="button"
-                  onClick={() => setShowPass(!showPass)}
-                  className="absolute right-4 top-3.5 text-gray-400"
+                <TextField
+                  isRequired
+                  name="email"
+                  type="email"
+                  className="flex flex-col gap-1.5"
+                  validate={(value) => {
+                    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                      return "Enter a valid email address";
+                    }
+                    return null;
+                  }}
                 >
+                  <Label className="text-sm font-semibold text-slate-700">Email Address</Label>
+                  <Input
+                    placeholder="name@example.com"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                  />
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
+              </div>
 
-                  {
-                    showPass ?
-                      <IoEyeOffOutline /> :
-                      <IoEyeOutline />
-                  }
+              {/* Row 2: Passwords */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <TextField
+                  isRequired
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  className="flex flex-col gap-1.5 relative"
+                  validate={(value) => {
+                    if (value.length < 8) {
+                      return "Minimum 8 characters required";
+                    }
+                    return null;
+                  }}
+                >
+                  <Label className="text-sm font-semibold text-slate-700">Password</Label>
+                  <div className="relative">
+                    <Input
+                      placeholder="••••••••"
+                      onChange={(e) => setPasswordValue((e.target as HTMLInputElement).value)}
+                      className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
 
-                </button>
-
-
+                <TextField
+                  isRequired
+                  name="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="flex flex-col gap-1.5 relative"
+                  validate={(value) => {
+                    if (value !== passwordValue) {
+                      return "Passwords do not match";
+                    }
+                    return null;
+                  }}
+                >
+                  <Label className="text-sm font-semibold text-slate-700">Confirm Password</Label>
+                  <div className="relative">
+                    <Input
+                      placeholder="••••••••"
+                      className="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition"
+                    >
+                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
               </div>
 
 
+              {/* Image */}
+              <TextField isRequired name="image" className="flex flex-col gap-1.5">
+                <Label className="text-sm font-semibold text-slate-700">Image Url</Label>
+                <Input
+                  type="url"
+                  placeholder="https://md-murad8.imgbb.com/"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                />
+                <FieldError className="text-xs text-rose-500 mt-1" />
+              </TextField>
 
-              <Input
-                icon={<HiOutlineLockClosed />}
-                placeholder="Confirm Password"
-                type="password"
-              />
+              {/* Row 3: Phone */}
+              <TextField isRequired name="phone" className="flex flex-col gap-1.5">
+                <Label className="text-sm font-semibold text-slate-700">Phone Number</Label>
+                <Input
+                  placeholder="Enter your phone number"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                />
+                <FieldError className="text-xs text-rose-500 mt-1" />
+              </TextField>
 
+              {/* Address */}
+              <TextField isRequired name="address" className="flex flex-col gap-1.5">
+                <Label className="text-sm font-semibold text-slate-700">Address</Label>
+                <Input
+                  placeholder="Street address, Apartment, Suite"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                />
+                <FieldError className="text-xs text-rose-500 mt-1" />
+              </TextField>
 
+              {/* City & Postal Code */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <TextField isRequired name="city" className="flex flex-col gap-1.5">
+                  <Label className="text-sm font-semibold text-slate-700">City</Label>
+                  <Input
+                    placeholder="Mymensingh"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                  />
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
 
-              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <TextField isRequired name="postalCode" className="flex flex-col gap-1.5">
+                  <Label className="text-sm font-semibold text-slate-700">Postal Code</Label>
+                  <Input
+                    placeholder="2200"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm text-slate-800"
+                  />
+                  <FieldError className="text-xs text-rose-500 mt-1" />
+                </TextField>
+              </div>
 
-                <input type="checkbox" />
-
-                <p>
-                  I agree to the
-                  <span className="text-orange-500">
-                    {" "}Terms of Service
-                  </span>
-                  {" "}and
-                  <span className="text-orange-500">
-                    {" "}Privacy Policy
-                  </span>
+              {/* Terms */}
+              <div className="flex items-start gap-3 text-sm pt-2">
+                <input
+                  type="checkbox"
+                  required
+                  className="mt-1 h-4 w-4 rounded border-slate-300 text-orange-600 accent-orange-500 focus:ring-orange-500 cursor-pointer"
+                />
+                <p className="text-slate-600 leading-tight">
+                  I agree to the{" "}
+                  <Link href="/terms" className="text-orange-600 hover:text-orange-700 font-medium hover:underline">
+                    Terms & Conditions
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="text-orange-600 hover:text-orange-700 font-medium hover:underline">
+                    Privacy Policy
+                  </Link>
                 </p>
-
               </div>
 
-
-
-
-              <button
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold transition"
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                className="w-full h-12 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-base shadow-lg shadow-orange-600/20 active:scale-[0.99] transition duration-200"
               >
                 Create Account
-              </button>
+              </Button>
 
-
-
-              <div className="flex items-center gap-3 text-xs text-gray-400">
-                <div className="h-px bg-gray-200 flex-1" />
-                OR
-                <div className="h-px bg-gray-200 flex-1" />
+              {/* Divider */}
+              <div className="flex items-center gap-4 py-2">
+                <div className="flex-1 border-t border-slate-200"></div>
+                <span className="text-slate-400 text-xs font-semibold tracking-wider">OR</span>
+                <div className="flex-1 border-t border-slate-200"></div>
               </div>
 
+              {/* Social Buttons */}
+              <div className="grid sm:grid-cols-2 gap-4 w-full">
+                <Button
+
+                  className="h-12 border border-slate-200 bg-white hover:bg-slate-50 transition font-medium text-slate-700 rounded-xl gap-3"
+                >
+                  <Image width={100} height={100}
+                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                    alt="Google"
+                    className="w-5 h-5"
+                  />
+                  Sign up with Google
+                </Button>
 
 
-              <button
-                className="w-full border py-3 rounded-xl flex items-center justify-center gap-3"
-              >
-                <FcGoogle size={22} />
-                Continue with Google
-              </button>
+              </div>
 
-
-
-              <p className="text-center text-sm text-gray-500">
-
-                Already have an account?
-
+              {/* Footer Sign in trigger */}
+              <p className="text-center text-sm text-slate-600 pt-4">
+                Already have an account?{" "}
                 <Link
-                  href="/login"
-                  className="text-orange-500 ml-1 font-semibold"
+                  href="/auth/login"
+                  className="text-orange-600 font-semibold hover:text-orange-700 hover:underline transition"
                 >
                   Login
                 </Link>
-
               </p>
-
-
-
-            </form>
-
+            </Form>
 
           </div>
-
         </div>
-
-
       </div>
-
-    </div>
+    </section>
   );
 };
-
-
-
-function Input({
-  icon,
-  placeholder,
-  type = "text"
-}: {
-  icon: React.ReactNode;
-  placeholder: string;
-  type?: string;
-}) {
-
-  return (
-
-    <div className="relative">
-
-      <div className="absolute left-4 top-3.5 text-gray-400">
-        {icon}
-      </div>
-
-
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="w-full border rounded-xl py-3 pl-11 pr-4 outline-none focus:border-orange-500"
-      />
-
-    </div>
-
-  )
-
-}
-
 
 export default RegisterPage;
