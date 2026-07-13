@@ -14,23 +14,37 @@ import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import secureAnimation from "@/app/assets/lottie/resicon.json";
+import { authClient } from "@/lib/auth-client";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [passwordValue, setPasswordValue] = React.useState("");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data: Record<string, string> = {};
+    const formValues: Record<string, string> = {};
 
     formData.forEach((value, key) => {
-      data[key] = value.toString();
+      formValues[key] = value.toString();
     });
 
-    console.log(data,'all data is');
+    console.log(formValues);
+
+    const { data, error } = await authClient.signUp.email({
+      name: formValues.name,
+      email: formValues.email,
+      password: formValues.password,
+    });
+
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+
+    console.log(data);
   };
 
   return (
