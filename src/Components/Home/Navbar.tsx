@@ -75,20 +75,14 @@ const Navbar = () => {
                 <LayoutDashboard className="h-7 w-7 text-orange-500" />
               </Link>
 
-                <Button
 
-                  onPress={() => authClient.signOut()}
-                >
-                  Logout
-                </Button>
-
-              <Image
-                src={user.image || "/default-avatar.png"}
-                alt={user.name}
-                width={42}
-                height={42}
-                className="rounded-full border-2 border-orange-500 object-cover"
-              />
+                <Image
+                  src={user.image || "/default-avatar.png"}
+                  alt={user.name}
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-full border-2 border-orange-500 object-cover"
+                />
             </div>
           ) : (
             <>
@@ -121,7 +115,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+
       {/* Mobile Menu */}
       <div
         className={`overflow-hidden transition-all duration-300 lg:hidden ${isOpen ? "max-h-[600px]" : "max-h-0"
@@ -150,13 +144,13 @@ const Navbar = () => {
             ) : user ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Image
-                    src={user.image || "/default-avatar.png"}
-                    alt={user.name}
-                    width={48}
-                    height={48}
-                    className="rounded-full border-2 border-orange-500 object-cover"
-                  />
+                    <Image
+                      src={user.image || "/default-avatar.png"}
+                      alt={user.name}
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 rounded-full border-2 border-orange-500 object-cover"
+                    />
 
                   <div>
                     <h3 className="font-semibold">{user.name}</h3>

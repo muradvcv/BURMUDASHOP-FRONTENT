@@ -1,3 +1,4 @@
+import Sidebar from "@/Components/Dashboard/Sidebar";
 import { ReactNode } from "react";
 
 type Props = {
@@ -8,8 +9,8 @@ const Dashboard = ({ children }: Props) => {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <aside className="w-64 border-r bg-white p-4">
-        Sidebar
+      <aside className="">
+       <Sidebar/>
       </aside>
 
       {/* Right Side */}
